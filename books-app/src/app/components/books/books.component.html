@@ -1,0 +1,42 @@
+<div class="container">
+  <h2>Gestión de Libros</h2>
+
+  <!-- FORMULARIO AGREGAR -->
+  <form (ngSubmit)="addBook()">
+    <input placeholder="Título" [(ngModel)]="newBook.title" name="title" required>
+    <input placeholder="Autor" [(ngModel)]="newBook.author" name="author" required>
+    <input placeholder="Año" [(ngModel)]="newBook.year" name="year" required>
+    <input placeholder="Género" [(ngModel)]="newBook.genre" name="genre" required>
+    <button type="submit">Agregar</button>
+  </form>
+
+  <!-- LISTADO -->
+  <table>
+    <thead>
+      <tr>
+        <th>Título</th>
+        <th>Autor</th>
+        <th>Año</th>
+        <th>Género</th>
+        <th>Estado</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let book of books">
+        <td><input [(ngModel)]="book.title"></td>
+        <td><input [(ngModel)]="book.author"></td>
+        <td><input [(ngModel)]="book.year"></td>
+        <td><input [(ngModel)]="book.genre"></td>
+        <td>{{ book.available ? 'Activo' : 'Inactivo' }}</td>
+        <td>
+          <button (click)="editBook(book)">Guardar</button>
+          <button (click)="deleteBook(book._id)">Eliminar</button>
+          <button (click)="toggleAvailability(book)">
+            {{ book.available ? 'Desactivar' : 'Reactivar' }}
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
